@@ -9,6 +9,13 @@ from .utils.read_write_model import read_model
 
 
 def main(model, output, num_matched):
+    #this function write pair of images into an 'output' file
+    #the images should detect feature point with the same point3D id -> point3D observed by the most images are chosen
+    #args:
+    #   - model: ColMap model: https://colmap.github.io/format.html#text-format
+    #   - num_matched: 
+    #return:
+    #   - 
     logger.info('Reading the COLMAP model...')
     cameras, images, points3D = read_model(model)
 
@@ -32,7 +39,7 @@ def main(model, output, num_matched):
         covis_num = np.array([covis[i] for i in covis_ids])
 
         if len(covis_ids) <= num_matched:
-            top_covis_ids = covis_ids[np.argsort(-covis_num)]
+            top_covis_ids = covis_ids[np.argsort(-covis_num)] #ffs, why do you have to use -covis_num here you extra mf.
         else:
             # get covisible image ids with top k number of common matches
             ind_top = np.argpartition(covis_num, -num_matched)

@@ -97,12 +97,11 @@ def main(conf: Dict,
         features_ref = [features_ref]
 
     match_from_paths(conf, pairs, matches, features_q, features_ref, overwrite)
-
     return matches
 
 
 def find_unique_new_pairs(pairs_all: List[Tuple[str]], match_path: Path = None):
-    '''Avoid to recompute duplicates to save time.'''
+    '''Avoid to recompute duplicates to save time.''' #holy fuck wtf coded this shit
     pairs = set()
     for i, j in pairs_all:
         if (j, i) not in pairs:
